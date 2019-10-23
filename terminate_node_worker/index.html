@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>nwjs crash demo - terminate node worker</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+        td {
+            border: 1px solid #eee;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .fail {
+            color: red;
+        }
+
+        #logger {
+            border: 1px solid #eee;
+            height: 200px;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>nwjs crash demo - terminate node worker</h1>
+    <h2>steps</h2>
+    <ul>
+        <li>open nwjs app</li>
+        <li>open devtool (important. no crash without open devtool)</li>
+        <li>click "start worker" button</li>
+        <li>wait several seconds.</li>
+        <li>click "stop worker" button</li>
+    </ul>
+    <table>
+        <thead>
+            <tr>
+                <td></td>
+                <td>0.29.0</td>
+                <td>0.40.2</td>
+                <td>0.41.3</td>
+                <td>0.42.0</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>mac</td>
+                <td class="success">success</td>
+                <td class="success">success</td>
+                <td class="success">success</td>
+                <td class="success">success</td>
+            </tr>
+            <tr>
+                <td>win</td>
+                <td class="success">success</td>
+                <td class="fail">fail</td>
+                <td class="fail">fail</td>
+                <td class="fail">fail</td>
+            </tr>
+        </tbody>
+    </table>
+    <button id="btnStart">start worker</button>
+    <button id="btnStop">stop worker</button>
+    <div id="logger"></div>
+    <script>
+        var w;
+        btnStart.onclick = function startWorker() {
+            if (!w) {
+                logger.innerHTML = '';
+                w = new Worker('worker.js');
+                w.onmessage = onmessage;
+                w.postMessage('loop');
+            }
+        }
+        btnStop.onclick = function stopWorker() {
+            if (w) {
+                w.terminate();
+                w = null;
+                log('terminate called');
+            }
+        }
+        function onmessage(evt) {
+            log(evt.data);
+        }
+        function log(t) {
+            var div = document.createElement('div');
+            div.innerHTML = t;
+            logger.append(div);
+        }
+    </script>
+</body>
+
+</html>

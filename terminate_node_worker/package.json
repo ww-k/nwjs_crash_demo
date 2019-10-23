@@ -1,0 +1,6 @@
+{
+    "name": "nwjs_crash_demo",
+    "version": "1.0.0",
+    "main": "index.html",
+    "chromium-args": "--enable-node-worker"
+}
