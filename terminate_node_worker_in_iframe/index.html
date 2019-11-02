@@ -30,8 +30,8 @@
     <h2>steps</h2>
     <ul>
         <li>open nwjs app</li>
-        <li>click "start" in iframe</li>
-        <li>click "remove iframe" button</li>
+        <li>click "start" button in iframe</li>
+        <li>click "stop" button in iframe</li>
     </ul>
     <h2>iframe src is a internet url</h2>
     <table>
@@ -55,22 +55,12 @@
             </tr>
         </tbody>
     </table>
-    <button id="rmIframe1">remove iframe</button>
     <iframe id="iframe1" src="https://cloudlab.paratera.com/node_worker_in_iframe/child.html"
         style="height: 400px;"></iframe>
 
     <h2>iframe src is a local url</h2>
     <div class="success">no crash</div>
-    <button id="rmIframe2">remove iframe</button>
     <iframe id="iframe2" src="child.html" style="height: 400px;"></iframe>
-    <script>
-        rmIframe1.onclick = function () {
-            iframe1.remove();
-        }
-        rmIframe2.onclick = function () {
-            iframe2.remove();
-        }
-    </script>
 </body>
 
 </html>
