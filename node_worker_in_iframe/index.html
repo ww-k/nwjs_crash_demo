@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>nwjs crash demo - node worker in iframe</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+        td {
+            border: 1px solid #eee;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .fail {
+            color: red;
+        }
+
+        iframe {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>nwjs crash demo - node worker in iframe</h1>
+    <h2>steps</h2>
+    <ul>
+        <li>open nwjs app</li>
+        <li>click "start" in iframe</li>
+        <li>click "remove iframe" button</li>
+    </ul>
+    <h2>iframe src is a internet url</h2>
+    <table>
+        <thead>
+            <tr>
+                <td></td>
+                <td>0.29.0</td>
+                <td>0.42.2</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>mac</td>
+                <td class="fail">fail</td>
+                <td class="fail">fail</td>
+            </tr>
+            <tr>
+                <td>win</td>
+                <td class="fail">fail</td>
+                <td class="fail">fail</td>
+            </tr>
+        </tbody>
+    </table>
+    <button id="rmIframe1">remove iframe</button>
+    <iframe id="iframe1" src="https://cloudlab.paratera.com/node_worker_in_iframe/child.html"
+        style="height: 400px;"></iframe>
+
+    <h2>iframe src is a local url</h2>
+    <div class="success">no crash</div>
+    <button id="rmIframe2">remove iframe</button>
+    <iframe id="iframe2" src="child.html" style="height: 400px;"></iframe>
+    <script>
+        rmIframe1.onclick = function () {
+            iframe1.remove();
+        }
+        rmIframe2.onclick = function () {
+            iframe2.remove();
+        }
+    </script>
+</body>
+
+</html>
